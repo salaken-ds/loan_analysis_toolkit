@@ -1,4 +1,4 @@
-# Loan Analysis Toolkit - Function Documentation
+# API Reference
 
 This document provides an overview of the functions in the `schedule.py` file, including their arguments, descriptions, and return values.
 
