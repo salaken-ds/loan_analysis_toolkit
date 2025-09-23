@@ -2,6 +2,9 @@
 # Loan Analysis Toolkit
 This packages generates all transactions and an interest schedule for loan accounts such as home loans. It runs daily interest accrual which makes it more accurate than simple formula based calculations. Most banks calculates interests daily and charge them monthly. This package mimics that process. In runs through a daily loop and performs calculation until the loan is paid off.  
 
+## Technical Documentation
+https://salaken-ds.github.io/loan_analysis_toolkit/
+
 ## Features:
 - calculates daily interest which makes the schedule very accurate
 - adjusts account balance on repayment dates
