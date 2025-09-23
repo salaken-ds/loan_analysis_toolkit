@@ -1,0 +1,1050 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Example usage of loan analysis toolkit &#8212; Loan Analysis Toolkit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-TGF745NWSQ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-TGF745NWSQ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-TGF745NWSQ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Loan Analysis Toolkit - Function Documentation" href="api_reference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/lat_site_logo.png" class="logo__image only-light" alt="Loan Analysis Toolkit - Home"/>
+    <script>document.write(`<img src="_static/lat_site_logo.png" class="logo__image only-dark" alt="Loan Analysis Toolkit - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Loan Analysis Toolkit
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">Loan Analysis Toolkit - Function Documentation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Example usage of loan analysis toolkit</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/examples.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Example usage of loan analysis toolkit</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-loan-transactons-and-interest-schedules">Generating loan transactons and interest schedules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-the-benefit-of-offset-account">Quantifying the benefit of offset account</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="example-usage-of-loan-analysis-toolkit">
+<h1>Example usage of loan analysis toolkit<a class="headerlink" href="#example-usage-of-loan-analysis-toolkit" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">loan_analysis_toolkit.schedule</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_loan_summary</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="generating-loan-transactons-and-interest-schedules">
+<h2>Generating loan transactons and interest schedules<a class="headerlink" href="#generating-loan-transactons-and-interest-schedules" title="Link to this heading">#</a></h2>
+<p>This is the primary function of the package. This function will generate all transactions on the loan account along with a monthly summary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loan parameters</span>
+<span class="n">loan_amount</span> <span class="o">=</span> <span class="mi">650_000</span>  <span class="c1"># Loan amount in dollars</span>
+<span class="n">annual_rate</span> <span class="o">=</span> <span class="mf">5.34</span>     <span class="c1"># Annual interest rate in percentage</span>
+<span class="n">loan_duration_years</span> <span class="o">=</span> <span class="mi">30</span>          <span class="c1"># Loan term in years</span>
+<span class="n">loan_duration_months</span> <span class="o">=</span> <span class="mi">0</span>          <span class="c1"># Additional months in loan term</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s1">&#39;2025-10-05&#39;</span>  <span class="c1"># Loan settlement date</span>
+<span class="n">repayment_frequency</span> <span class="o">=</span> <span class="s1">&#39;fortnightly&#39;</span>  <span class="c1"># Repayment frequency</span>
+<span class="n">initial_offset_amount</span> <span class="o">=</span> <span class="mi">20_000</span>  <span class="c1"># Initial offset account balance in dollars</span>
+<span class="n">offset_contribution_frequency</span> <span class="o">=</span> <span class="s1">&#39;monthly&#39;</span>  <span class="c1"># Offset contribution frequency</span>
+<span class="n">offset_contribution_regular_amount</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># Offset contribution amount in dollars</span>
+
+<span class="n">loan_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;loan_amount&#39;</span> <span class="p">:</span> <span class="n">loan_amount</span><span class="p">,</span>
+                <span class="s1">&#39;annual_rate&#39;</span> <span class="p">:</span> <span class="n">annual_rate</span><span class="p">,</span>
+                <span class="s1">&#39;loan_duration_years&#39;</span> <span class="p">:</span> <span class="n">loan_duration_years</span><span class="p">,</span>
+                <span class="s1">&#39;loan_duration_months&#39;</span> <span class="p">:</span> <span class="n">loan_duration_months</span><span class="p">,</span>
+                <span class="s1">&#39;start_date&#39;</span> <span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s1">&#39;repayment_frequency&#39;</span> <span class="p">:</span> <span class="n">repayment_frequency</span><span class="p">,</span>
+                <span class="s1">&#39;initial_offset_amount&#39;</span> <span class="p">:</span> <span class="n">initial_offset_amount</span><span class="p">,</span>
+                <span class="s1">&#39;offset_contribution_frequency&#39;</span> <span class="p">:</span> <span class="n">offset_contribution_frequency</span><span class="p">,</span>
+                <span class="s1">&#39;offset_contribution_regular_amount&#39;</span> <span class="p">:</span> <span class="n">offset_contribution_regular_amount</span>
+                <span class="p">}</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">prepare_loan_summary</span><span class="p">(</span><span class="n">loan_parameters</span><span class="p">,</span> <span class="n">store_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">total_interest_paid_by_customer</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;total_interest_charged&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total interested paid by the customer: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_interest_paid_by_customer</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;monthly_summary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total interested paid by the customer: 423561.74619052047
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MONTH</th>
+      <th>Total Repayment</th>
+      <th>Total Interest Charged</th>
+      <th>Loan Balance (First Day of Month)</th>
+      <th>Offset Balance (Last Day of Month)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2025-10</td>
+      <td>1672.564346</td>
+      <td>0.000000</td>
+      <td>650000.000000</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2025-11</td>
+      <td>5017.693037</td>
+      <td>2852.371784</td>
+      <td>646654.871309</td>
+      <td>20500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2025-12</td>
+      <td>3345.128691</td>
+      <td>2754.865877</td>
+      <td>648916.980279</td>
+      <td>21000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2026-01</td>
+      <td>3345.128691</td>
+      <td>2840.477592</td>
+      <td>648412.329180</td>
+      <td>21500</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2026-02</td>
+      <td>3345.128691</td>
+      <td>2834.452964</td>
+      <td>647901.653453</td>
+      <td>22000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We have seen the monthly summmaries above which includes the total interest paid by the customer. Lets checkout the transactions at the beginning of the time period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;all_transactions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Transaction Type</th>
+      <th>Transaction Amount</th>
+      <th>Loan Balance</th>
+      <th>Offset Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2025-10-05</td>
+      <td>Settlement</td>
+      <td>650000.000000</td>
+      <td>650000.000000</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2025-10-19</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>648327.435654</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2025-11-02</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>646654.871309</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2025-11-05</td>
+      <td>Interest</td>
+      <td>2852.371784</td>
+      <td>649507.243093</td>
+      <td>20000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2025-11-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>649507.243093</td>
+      <td>20500</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2025-11-16</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>647834.678748</td>
+      <td>20500</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2025-11-30</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>646162.114402</td>
+      <td>20500</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2025-12-05</td>
+      <td>Interest</td>
+      <td>2754.865877</td>
+      <td>648916.980279</td>
+      <td>20500</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2025-12-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>648916.980279</td>
+      <td>21000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2025-12-14</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>647244.415933</td>
+      <td>21000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2025-12-28</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>645571.851588</td>
+      <td>21000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2026-01-05</td>
+      <td>Interest</td>
+      <td>2840.477592</td>
+      <td>648412.329180</td>
+      <td>21000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2026-01-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>648412.329180</td>
+      <td>21500</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2026-01-11</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>646739.764834</td>
+      <td>21500</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2026-01-25</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>645067.200489</td>
+      <td>21500</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2026-02-05</td>
+      <td>Interest</td>
+      <td>2834.452964</td>
+      <td>647901.653453</td>
+      <td>21500</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2026-02-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>647901.653453</td>
+      <td>22000</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2026-02-08</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>646229.089107</td>
+      <td>22000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2026-02-22</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>644556.524762</td>
+      <td>22000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2026-03-05</td>
+      <td>Interest</td>
+      <td>2555.158396</td>
+      <td>647111.683158</td>
+      <td>22000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Lets also examine the transactions towards the end of the loan period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;all_transactions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Transaction Type</th>
+      <th>Transaction Amount</th>
+      <th>Loan Balance</th>
+      <th>Offset Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1213</th>
+      <td>2050-01-05</td>
+      <td>Interest</td>
+      <td>0.000000</td>
+      <td>16501.079807</td>
+      <td>165000</td>
+    </tr>
+    <tr>
+      <th>1214</th>
+      <td>2050-01-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>16501.079807</td>
+      <td>165500</td>
+    </tr>
+    <tr>
+      <th>1215</th>
+      <td>2050-01-09</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>14828.515461</td>
+      <td>165500</td>
+    </tr>
+    <tr>
+      <th>1216</th>
+      <td>2050-01-23</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>13155.951116</td>
+      <td>165500</td>
+    </tr>
+    <tr>
+      <th>1217</th>
+      <td>2050-02-05</td>
+      <td>Interest</td>
+      <td>0.000000</td>
+      <td>13155.951116</td>
+      <td>165500</td>
+    </tr>
+    <tr>
+      <th>1218</th>
+      <td>2050-02-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>13155.951116</td>
+      <td>166000</td>
+    </tr>
+    <tr>
+      <th>1219</th>
+      <td>2050-02-06</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>11483.386770</td>
+      <td>166000</td>
+    </tr>
+    <tr>
+      <th>1220</th>
+      <td>2050-02-20</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>9810.822425</td>
+      <td>166000</td>
+    </tr>
+    <tr>
+      <th>1221</th>
+      <td>2050-03-05</td>
+      <td>Interest</td>
+      <td>0.000000</td>
+      <td>9810.822425</td>
+      <td>166000</td>
+    </tr>
+    <tr>
+      <th>1222</th>
+      <td>2050-03-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>9810.822425</td>
+      <td>166500</td>
+    </tr>
+    <tr>
+      <th>1223</th>
+      <td>2050-03-06</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>8138.258079</td>
+      <td>166500</td>
+    </tr>
+    <tr>
+      <th>1224</th>
+      <td>2050-03-20</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>6465.693733</td>
+      <td>166500</td>
+    </tr>
+    <tr>
+      <th>1225</th>
+      <td>2050-04-03</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>4793.129388</td>
+      <td>166500</td>
+    </tr>
+    <tr>
+      <th>1226</th>
+      <td>2050-04-05</td>
+      <td>Interest</td>
+      <td>0.000000</td>
+      <td>4793.129388</td>
+      <td>166500</td>
+    </tr>
+    <tr>
+      <th>1227</th>
+      <td>2050-04-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>4793.129388</td>
+      <td>167000</td>
+    </tr>
+    <tr>
+      <th>1228</th>
+      <td>2050-04-17</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>3120.565042</td>
+      <td>167000</td>
+    </tr>
+    <tr>
+      <th>1229</th>
+      <td>2050-05-01</td>
+      <td>Repayment</td>
+      <td>1672.564346</td>
+      <td>1448.000697</td>
+      <td>167000</td>
+    </tr>
+    <tr>
+      <th>1230</th>
+      <td>2050-05-05</td>
+      <td>Interest</td>
+      <td>0.000000</td>
+      <td>1448.000697</td>
+      <td>167000</td>
+    </tr>
+    <tr>
+      <th>1231</th>
+      <td>2050-05-05</td>
+      <td>Offset Contribution</td>
+      <td>500.000000</td>
+      <td>1448.000697</td>
+      <td>167500</td>
+    </tr>
+    <tr>
+      <th>1232</th>
+      <td>2050-05-15</td>
+      <td>Repayment</td>
+      <td>1448.000697</td>
+      <td>0.000000</td>
+      <td>167500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="quantifying-the-benefit-of-offset-account">
+<h2>Quantifying the benefit of offset account<a class="headerlink" href="#quantifying-the-benefit-of-offset-account" title="Link to this heading">#</a></h2>
+<p>This example shows how much interest can be saved by having an offset account where the customer will be regularly contributing <code class="docutils literal notranslate"><span class="pre">$500</span></code> a month with an initial balance of <code class="docutils literal notranslate"><span class="pre">$20,000</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loan parameters</span>
+<span class="n">loan_amount</span> <span class="o">=</span> <span class="mi">650_000</span>  <span class="c1"># Loan amount in dollars</span>
+<span class="n">annual_rate</span> <span class="o">=</span> <span class="mf">5.34</span>     <span class="c1"># Annual interest rate in percentage</span>
+<span class="n">loan_duration_years</span> <span class="o">=</span> <span class="mi">30</span>          <span class="c1"># Loan term in years</span>
+<span class="n">loan_duration_months</span> <span class="o">=</span> <span class="mi">0</span>          <span class="c1"># Additional months in loan term</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s1">&#39;2025-10-05&#39;</span>  <span class="c1"># Loan settlement date</span>
+<span class="n">repayment_frequency</span> <span class="o">=</span> <span class="s1">&#39;fortnightly&#39;</span>  <span class="c1"># Repayment frequency</span>
+<span class="n">initial_offset_amount</span> <span class="o">=</span> <span class="mi">20_000</span>  <span class="c1"># Initial offset account balance in dollars</span>
+<span class="n">offset_contribution_frequency</span> <span class="o">=</span> <span class="s1">&#39;monthly&#39;</span>  <span class="c1"># Offset contribution frequency</span>
+<span class="n">offset_contribution_regular_amount</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># Offset contribution amount in dollars</span>
+
+<span class="n">loan_parameters_with_offset</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;loan_amount&#39;</span> <span class="p">:</span> <span class="n">loan_amount</span><span class="p">,</span>
+                <span class="s1">&#39;annual_rate&#39;</span> <span class="p">:</span> <span class="n">annual_rate</span><span class="p">,</span>
+                <span class="s1">&#39;loan_duration_years&#39;</span> <span class="p">:</span> <span class="n">loan_duration_years</span><span class="p">,</span>
+                <span class="s1">&#39;loan_duration_months&#39;</span> <span class="p">:</span> <span class="n">loan_duration_months</span><span class="p">,</span>
+                <span class="s1">&#39;start_date&#39;</span> <span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s1">&#39;repayment_frequency&#39;</span> <span class="p">:</span> <span class="n">repayment_frequency</span><span class="p">,</span>
+                <span class="s1">&#39;initial_offset_amount&#39;</span> <span class="p">:</span> <span class="n">initial_offset_amount</span><span class="p">,</span>
+                <span class="s1">&#39;offset_contribution_frequency&#39;</span> <span class="p">:</span> <span class="n">offset_contribution_frequency</span><span class="p">,</span>
+                <span class="s1">&#39;offset_contribution_regular_amount&#39;</span> <span class="p">:</span> <span class="n">offset_contribution_regular_amount</span>
+                <span class="p">}</span>
+
+<span class="n">res_with_offset</span> <span class="o">=</span> <span class="n">prepare_loan_summary</span><span class="p">(</span><span class="n">loan_parameters_with_offset</span><span class="p">,</span> <span class="n">store_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">total_interest_paid_by_customer_with_offset</span> <span class="o">=</span> <span class="n">res_with_offset</span><span class="p">[</span><span class="s1">&#39;total_interest_charged&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total interest paid by the customer:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    - with offset account : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_interest_paid_by_customer_with_offset</span><span class="p">))</span>
+
+<span class="n">loan_parameters_without_offset</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;loan_amount&#39;</span> <span class="p">:</span> <span class="n">loan_amount</span><span class="p">,</span>
+                <span class="s1">&#39;annual_rate&#39;</span> <span class="p">:</span> <span class="n">annual_rate</span><span class="p">,</span>
+                <span class="s1">&#39;loan_duration_years&#39;</span> <span class="p">:</span> <span class="n">loan_duration_years</span><span class="p">,</span>
+                <span class="s1">&#39;loan_duration_months&#39;</span> <span class="p">:</span> <span class="n">loan_duration_months</span><span class="p">,</span>
+                <span class="s1">&#39;start_date&#39;</span> <span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s1">&#39;repayment_frequency&#39;</span> <span class="p">:</span> <span class="n">repayment_frequency</span><span class="p">,</span>
+                <span class="s1">&#39;initial_offset_amount&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">&#39;offset_contribution_frequency&#39;</span> <span class="p">:</span> <span class="n">offset_contribution_frequency</span><span class="p">,</span>
+                <span class="s1">&#39;offset_contribution_regular_amount&#39;</span> <span class="p">:</span> <span class="mi">0</span>
+                <span class="p">}</span>
+
+<span class="n">res_without_offset</span> <span class="o">=</span> <span class="n">prepare_loan_summary</span><span class="p">(</span><span class="n">loan_parameters_without_offset</span><span class="p">,</span> <span class="n">store_results</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">total_interest_paid_by_customer_without_offset</span> <span class="o">=</span> <span class="n">res_without_offset</span><span class="p">[</span><span class="s1">&#39;total_interest_charged&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    - without offset account : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_interest_paid_by_customer_without_offset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interest saving due to offset account : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_interest_paid_by_customer_without_offset</span> <span class="o">-</span> <span class="n">total_interest_paid_by_customer_with_offset</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total interest paid by the customer:
+    - with offset account : 423561.74619052047
+    - without offset account : 647093.3361262039
+Interest saving due to offset account : 223531.5899356834
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api_reference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Loan Analysis Toolkit - Function Documentation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-loan-transactons-and-interest-schedules">Generating loan transactons and interest schedules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-the-benefit-of-offset-account">Quantifying the benefit of offset account</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Salaken Syed
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
