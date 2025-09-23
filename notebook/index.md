@@ -2,7 +2,7 @@
 # Loan Analysis Toolkit
 This packages generates all transactions and an interest schedule for loan accounts such as home loans. It runs daily interest accrual which makes it more accurate than simple formula based calculations. Most banks calculates interests daily and charge them monthly. This package mimics that process. In runs through a daily loop and performs calculation until the loan is paid off.  
 
-## Features:
+## Features
 - calculates daily interest which makes the schedule very accurate
 - adjusts account balance on repayment dates
 - charges interest on monthly loan anniversary e.g. if loan is settled on the 3rd of the month then interest is always charged on the 3rd of the month
@@ -10,10 +10,10 @@ This packages generates all transactions and an interest schedule for loan accou
 - regular contribution of offset account
 - returns (1) all transactions, (2) monthly summary containing interest charged, repayment, loan balance and offset account balance and (3) total interest charged to the customer
 
-## Assumption:
+## Assumption
 - Daily interest charge is based on 365 days in a year, even in a leap year. This is because most Australian bank does it that way.
 
-## Usage examples:
+## Usage examples
 - Generate all transactions to the loan account to cross-check against bank. Helps to make sure bank is not making any mistakes. (_It may sound surprising, but banks DO make a lot of mistakes!_)
 - Calculate interest savings by adding an offset account, and making regular contributions. This helps creating strategies to pay out the loan faster and helps with financial wellbeing.
 

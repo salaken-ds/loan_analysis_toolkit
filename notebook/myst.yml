@@ -1,0 +1,37 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 484fd736-8100-4926-90bf-c64b4cf57a1a
+  title: Loan Analysis Toolkit
+  subtitle: A Python package for loan analysis and startegy planning
+  description: Provides various tools for loan analysis, including generating loan amortization schedule and total interest paid using daily calculation.
+  # keywords: []
+  authors:
+  - name: Salaken Syed
+    socials:
+      linkedin: https://www.linkedin.com/in/salaken/
+
+  github: https://github.com/smsalaken/loan_analysis_toolkit
+        
+  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
+site:
+  template: book-theme
+  options:
+  #   favicon: favicon.ico
+    logo: lat_site_logo.png
+
+
+toc:
+    - file: examples
+      title: Examples
+      numbered: true
+      sections:
+        - file: examples
+          title: Generating loan transactons and interest schedules
+          numbered: true
+        - file: examples
+          title: Quantifying the benefit of offset account
+          numbered: true
+    - file: api_reference
+      title: API Reference
+      numbered: False

@@ -36,6 +36,7 @@ build-backend = "setuptools.build_meta"
 
 [dependency-groups]
 dev = [
+    "jupyter-book>=2.0.0a0",
     "pytest>=8.4.2",
 ]
 
