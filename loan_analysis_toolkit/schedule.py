@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import pandas as pd
 from .utils import inputval_prepare_loan_summary
-# pd.set_option('display.max_columns', None)  # to display all rows in the dataframe
 
 
 def calculate_minimum_repayment(principal, annual_rate, years, months, repayment_frequency='annual'):

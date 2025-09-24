@@ -21,21 +21,3 @@ def test_calculate_daily_interest_zero_rate():
     principal = 1000
     annual_rate = 0
     assert calculate_daily_interest(principal, annual_rate) == 0
-
-# def test_calculate_daily_interest_negative_values():
-#     # Test with negative values
-#     with pytest.raises(ValueError):
-#         calculate_daily_interest(-1000, 5)
-#     with pytest.raises(ValueError):
-#         calculate_daily_interest(1000, -5)
-#     with pytest.raises(ValueError):
-#         calculate_daily_interest(1000, 5)
-
-# def test_calculate_daily_interest_non_numeric():
-#     # Test with non-numeric inputs
-#     with pytest.raises(TypeError):
-#         calculate_daily_interest("1000", 5)
-#     with pytest.raises(TypeError):
-#         calculate_daily_interest(1000, "5")
-#     with pytest.raises(TypeError):
-#         calculate_daily_interest(1000, 5)
