@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import pandas as pd
-pd.set_option('display.max_columns', None)  # to display all rows in the dataframe
+from .utils import inputval_prepare_loan_summary
+# pd.set_option('display.max_columns', None)  # to display all rows in the dataframe
 
 
 def calculate_minimum_repayment(principal, annual_rate, years, months, repayment_frequency='annual'):
@@ -277,6 +278,9 @@ def prepare_loan_summary(loan_params : dict, store_results : bool = False):
         total_interest_charged: total interest charged by the bank over the life of the loan, in dollars.
         total_repayments: total repayment made by the customers over the life of the loan, in dollars.
     """
+    # validate inputs
+    inputval_prepare_loan_summary(**loan_params)
+
     # extract loan parameters
     start_date = loan_params.get('start_date')
     loan_amount = loan_params.get('loan_amount')
@@ -309,36 +313,3 @@ def prepare_loan_summary(loan_params : dict, store_results : bool = False):
                'total_repayments' : total_repayments
                }
     return results
-
-# if __name__ == "__main__":
-#     # loan parameters
-#     loan_amount = 650_000  # Loan amount in dollars
-#     annual_rate = 5.34     # Annual interest rate in percentage
-#     loan_duration_years = 30          # Loan term in years
-#     loan_duration_months = 0          # Additional months in loan term
-#     start_date = '2025-10-05'  # Loan settlement date
-#     repayment_frequency = 'fortnightly'  # Repayment frequency
-#     initial_offset_amount = 20_000  # Initial offset account balance in dollars
-#     offset_contribution_frequency = 'monthly'  # Offset contribution frequency
-#     offset_contribution_regular_amount = 500  # Offset contribution amount in dollars
-
-#     loan_parameters = {'loan_amount' : loan_amount,
-#                    'annual_rate' : annual_rate,
-#                    'loan_duration_years' : loan_duration_years,
-#                    'loan_duration_months' : loan_duration_months,
-#                    'start_date' : start_date,
-#                    'repayment_frequency' : repayment_frequency,
-#                    'initial_offset_amount' : initial_offset_amount,
-#                    'offset_contribution_frequency' : offset_contribution_frequency,
-#                    'offset_contribution_regular_amount' : offset_contribution_regular_amount
-#                    }
-
-#     res = prepare_loan_summary(loan_parameters, store_results = True)
-
-#     total_interest_paid_by_customer = res['total_interest_charged']
-#     print("total interested paid by the customer: {}".format(total_interest_paid_by_customer))
-#     print(res['monthly_summary'].head())
-
-   
-     
-

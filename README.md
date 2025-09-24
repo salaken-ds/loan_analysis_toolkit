@@ -53,3 +53,12 @@ if __name__ == "__main__":
     print("total interested paid by the customer: {}".format(total_interest_paid_by_customer))
     print(res['monthly_summary'].head())
 ```
+
+## Contributions
+Please raise a pull request outlining changes.
+
+## Others
+- Pre-requisite: `uv` (either `pip install uv` or see https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
+- Clone and then build using: `uv build`
+-Local install into another virtual environment using the built package (assuming you're currently in directory `xyz` which is at the same level as `loan_analysis_toolkit`):
+`uv pip install ../loan_analysis_toolkit/dist/loan_analysis_toolkit-0.1.0.tar.gz`
