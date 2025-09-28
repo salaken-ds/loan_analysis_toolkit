@@ -13,7 +13,10 @@ def valid_loan_params():
         "repayment_frequency": "monthly",
         "initial_offset_amount": 10000,
         "offset_contribution_frequency": "monthly",
-        "offset_contribution_regular_amount": 500
+        "offset_contribution_regular_amount": 500,
+        "extra_repayments_frequency": "annually",
+        "extra_repayments_regular_amount": 5000,
+        "capture_interest_accrual": True
     }
 
 @patch("loan_analysis_toolkit.schedule.inputval_prepare_loan_summary")
@@ -45,7 +48,10 @@ def test_prepare_loan_summary_zero_loan_amount(mock_input_validation):
         "repayment_frequency": "monthly",
         "initial_offset_amount": 10000,
         "offset_contribution_frequency": "monthly",
-        "offset_contribution_regular_amount": 500
+        "offset_contribution_regular_amount": 500,
+        "extra_repayments_frequency": "annually",
+        "extra_repayments_regular_amount": 5000,
+        "capture_interest_accrual": True
     }
     result = prepare_loan_summary(loan_params)
     
