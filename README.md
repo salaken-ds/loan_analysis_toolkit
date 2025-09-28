@@ -24,8 +24,7 @@ https://salaken-ds.github.io/loan_analysis_toolkit/
 from loan_analysis_toolkit.schedule import prepare_loan_summary
 
 
-if __name__ == "__main__":
-    # loan parameters
+if __name__ == "__main__":# loan parameters
     loan_amount = 650_000  # Loan amount in dollars
     annual_rate = 5.34     # Annual interest rate in percentage
     loan_duration_years = 30          # Loan term in years
@@ -35,23 +34,31 @@ if __name__ == "__main__":
     initial_offset_amount = 20_000  # Initial offset account balance in dollars
     offset_contribution_frequency = 'monthly'  # Offset contribution frequency
     offset_contribution_regular_amount = 500  # Offset contribution amount in dollars
+    extra_repayments_frequency = 'annually'  # Extra repayments frequency
+    extra_repayments_regular_amount = 5_000  # Extra repayments amount in dollars
+    # Whether to capture daily and monthly interest accruals in the transactions
+    # Default is False
+    capture_interest_accrual = True
 
     loan_parameters = {'loan_amount' : loan_amount,
-                   'annual_rate' : annual_rate,
-                   'loan_duration_years' : loan_duration_years,
-                   'loan_duration_months' : loan_duration_months,
-                   'start_date' : start_date,
-                   'repayment_frequency' : repayment_frequency,
-                   'initial_offset_amount' : initial_offset_amount,
-                   'offset_contribution_frequency' : offset_contribution_frequency,
-                   'offset_contribution_regular_amount' : offset_contribution_regular_amount
-                   }
+                'annual_rate' : annual_rate,
+                'loan_duration_years' : loan_duration_years,
+                'loan_duration_months' : loan_duration_months,
+                'start_date' : start_date,
+                'repayment_frequency' : repayment_frequency,
+                'initial_offset_amount' : initial_offset_amount,
+                'offset_contribution_frequency' : offset_contribution_frequency,
+                'offset_contribution_regular_amount' : offset_contribution_regular_amount,
+                'extra_repayments_frequency' : extra_repayments_frequency,
+                'extra_repayments_regular_amount' : extra_repayments_regular_amount,
+                'capture_interest_accrual' : capture_interest_accrual
+                }
 
-    res = prepare_loan_summary(loan_parameters, store_results = True)
+    res = prepare_loan_summary(loan_parameters, store_results = False)
 
     total_interest_paid_by_customer = res['total_interest_charged']
     print("total interested paid by the customer: {}".format(total_interest_paid_by_customer))
-    print(res['monthly_summary'].head())
+    display(res['monthly_summary'].head())
 ```
 
 ## Contributions
