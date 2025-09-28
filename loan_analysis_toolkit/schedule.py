@@ -127,7 +127,9 @@ def calculate_end_date(start_date=datetime.now(), years:int=0, months:int=0):
 def generate_loan_transactions(start_date, loan_amount, annual_rate,
                                initial_offset_amount, minimum_repayments,
                                all_dates, interest_charge_dates, repayment_dates, 
-                               offset_contribution_dates, offset_contribution_regular_amount):
+                               offset_contribution_dates, offset_contribution_regular_amount,
+                               extra_repayments_dates, extra_repayments_regular_amount,
+                               capture_interest_accrual: bool = False):
     """
     Generate a loan schedule including repayments, interest charges, loan balance and offset.
 
@@ -138,6 +140,10 @@ def generate_loan_transactions(start_date, loan_amount, annual_rate,
         all_dates (list): A list of all dates to iterate through (daily).
         interest_charge_dates (list): A list of dates when interest is charged (monthly).
         offset_contribution_dates (list): A list of dates when offset contributions are made.
+        offset_contribution_regular_amount (float): The regular amount contributed to the offset account.
+        extra_repayments_dates (list): A list of dates when extra repayments are made.
+        extra_repayments_regular_amount (float): The regular amount for extra repayments.
+        capture_interest_accrual (bool): Whether to capture daily and monthly interest accruals in the transactions. Default is False.
 
     Returns:
         pd.DataFrame: A DataFrame containing the loan schedule.
@@ -157,9 +163,12 @@ def generate_loan_transactions(start_date, loan_amount, annual_rate,
         daily_interest = calculate_daily_interest(interest_chargeable_amount, annual_rate)
         daily_interest = max(daily_interest, 0)  # to ensure interest is not negative
         monthly_interest += daily_interest
+        if capture_interest_accrual:
+            transactions.append([c_date, 'Daily Interest Acrrued', daily_interest, current_loan_balance, offset_amount])
+            transactions.append([c_date, 'Monthly Interest Acrrued', monthly_interest, current_loan_balance, offset_amount])
         if c_date in interest_charge_dates:
             current_loan_balance += monthly_interest
-            transactions.append([c_date, 'Interest', monthly_interest, current_loan_balance, offset_amount])
+            transactions.append([c_date, 'Interest Charged', monthly_interest, current_loan_balance, offset_amount])
             monthly_interest = 0
         # offset contribution needs to happen before interest calculation on that day
         if c_date in offset_contribution_dates:
@@ -169,6 +178,10 @@ def generate_loan_transactions(start_date, loan_amount, annual_rate,
         if c_date in repayment_dates:
             current_loan_balance -= minimum_repayments
             transactions.append([c_date, 'Repayment', minimum_repayments, current_loan_balance, offset_amount])
+        if c_date in extra_repayments_dates:
+            extra_repayment = min(extra_repayments_regular_amount, current_loan_balance)  # to ensure we don't pay more than the remaining loan balance
+            current_loan_balance -= extra_repayment
+            transactions.append([c_date, 'Extra Repayment', extra_repayment, current_loan_balance, offset_amount])
         
         if current_loan_balance <= 0.01:  # small threshold to account for floating point precision
             current_loan_balance = 0
@@ -181,11 +194,19 @@ def generate_loan_transactions(start_date, loan_amount, annual_rate,
     return df
 
 
-def create_amortization_schedule(start_date: str, loan_amount: float, annual_rate: float, 
-                                 loan_duration_years: int, loan_duration_months: int,
-                                 repayment_frequency: str, initial_offset_amount: float, 
-                                 offset_contribution_frequency: str, 
-                                 regular_amount_offset_contribution: float):
+def create_amortization_schedule(start_date: str, 
+                                loan_amount: float, 
+                                annual_rate: float, 
+                                loan_duration_years: int, 
+                                loan_duration_months: int,
+                                repayment_frequency: str, 
+                                initial_offset_amount: float, 
+                                offset_contribution_frequency: str, 
+                                regular_amount_offset_contribution: float,
+                                extra_repayments_frequency: str,
+                                extra_repayments_regular_amount: float,
+                                capture_interest_accrual: bool = False
+                                 ):
     """ Generates loan transactions by passing required input to the daily routine.
     Args:
         start_date (str): the settlement date, or start date of the loan. Must be a string in YYYY-MM-DD format. Internally converted to datetime object.
@@ -197,6 +218,7 @@ def create_amortization_schedule(start_date: str, loan_amount: float, annual_rat
         initial_offset_amount (float): initial contribution to the offset account when loan is set up.
         offset_contribution_frequency (str): frequency denoting how often the customer puts money to the offset account. Valid values are "weekly", "fortnightly" and "monthly".
         regular_amount_offset_contribution (float): regular contribution amount to the offset account. This is the amount contributed every "offset_contribution_frequency".
+        capture_interest_accrual (bool): Whether to capture daily and monthly interest accruals in the transactions. Default is False.
     """
     # Convert start_date string to datetime object
     start_date = datetime.strptime(start_date, '%Y-%m-%d')
@@ -214,6 +236,9 @@ def create_amortization_schedule(start_date: str, loan_amount: float, annual_rat
     offset_contribution_dates.pop(0)  # remove the first date as offset contribution starts after settlement date
     interest_charge_dates = find_relevant_dates(start_date, end_date, 'monthly') # interest is calculated daily but charged monthly on the same day of the month as settlement date
     interest_charge_dates.pop(0)  # remove the first date as interest starts accruing after settlement date
+    extra_repayments_dates = find_relevant_dates(start_date, end_date, extra_repayments_frequency)
+    extra_repayments_dates.pop(0)  # remove the first date as extra repayments starts after settlement date
+    # generate all dates between start and end date for daily interest calculation  
     all_dates = find_relevant_dates(start_date, end_date, 'daily') # daily dates for iterating through the schedule
     all_dates.pop(0)  # remove the first date as interest starts accruing after settlement date
    
@@ -222,7 +247,10 @@ def create_amortization_schedule(start_date: str, loan_amount: float, annual_rat
                                                    initial_offset_amount, minimum_repayments,
                                                    all_dates, interest_charge_dates, repayment_dates, 
                                                    offset_contribution_dates, 
-                                                   regular_amount_offset_contribution)
+                                                   regular_amount_offset_contribution,
+                                                   extra_repayments_dates, 
+                                                   extra_repayments_regular_amount,
+                                                   capture_interest_accrual)
     
     return loan_transactions
 
@@ -236,7 +264,7 @@ def create_monthly_summary(transactions: pd.DataFrame):
     # Group by 'Date' and calculate the required columns
     result = df.groupby('Year-Month').agg(
         TOTAL_REPAYMENT=('Transaction Amount', lambda x: x[df.loc[x.index, 'Transaction Type'] == 'Repayment'].sum()),
-        TOTAL_INTEREST=('Transaction Amount', lambda x: x[df.loc[x.index, 'Transaction Type'] == 'Interest'].sum()),
+        TOTAL_INTEREST=('Transaction Amount', lambda x: x[df.loc[x.index, 'Transaction Type'] == 'Interest Charged'].sum()),
         LOAN_BALANCE_FIRSTDAY=('Loan Balance', 'first'),
         OFFSET_BALANCE_LASTDAY=('Offset Balance', 'last')
     ).reset_index()
@@ -270,6 +298,10 @@ def prepare_loan_summary(loan_params : dict, store_results : bool = False):
         initial_offset_amount (float) : initial contribution to the offset account when loan is set up.
         offset_contribution_frequency (string): fvnt6requency denoting how often the customer puts money to the offset account. Valid values are "weekly", "fortnightly" and "monthly".
         offset_contribution_regular_amount (float): regular contribution amount to the offset account. This is the amount contributed every "offset_contribution_frequency".
+        extra_repayments_frequency (string): frequency denoting how often extra repayments are made. Valid values are "weekly", "fortnightly" and "monthly".
+        extra_repayments_regular_amount (float): regular extra repayment amount. This is the amount contributed every "extra_repayments_frequency".
+        capture_interest_accrual (bool): Whether to capture daily and monthly interest accruals in the transactions. Default is False.
+    Args:
 
     Returns a dictionary containing the following keys:
         all_transactions: pandas dataframe containing all transactions on the loan account.
@@ -290,12 +322,17 @@ def prepare_loan_summary(loan_params : dict, store_results : bool = False):
     initial_offset_amount = loan_params.get('initial_offset_amount')
     offset_contribution_frequency = loan_params.get('offset_contribution_frequency')
     offset_contribution_regular_amount = loan_params.get('offset_contribution_regular_amount')
+    extra_repayments_frequency = loan_params.get('extra_repayments_frequency')
+    extra_repayments_regular_amount = loan_params.get('extra_repayments_regular_amount')
+    capture_interest_accrual = loan_params.get('capture_interest_accrual', False)
     
     # generate all loan transactions
     all_transactions = create_amortization_schedule(start_date, loan_amount, 
                                                     annual_rate, loan_duration_years, loan_duration_months,
                                                     repayment_frequency, initial_offset_amount, 
-                                                    offset_contribution_frequency, offset_contribution_regular_amount)
+                                                    offset_contribution_frequency, offset_contribution_regular_amount,
+                                                    extra_repayments_frequency, extra_repayments_regular_amount,
+                                                    capture_interest_accrual)
     if store_results:
         all_transactions.to_csv('loan_transactions.csv', index=False)
 

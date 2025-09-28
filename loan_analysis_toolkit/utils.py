@@ -10,3 +10,6 @@ class inputval_prepare_loan_summary(BaseModel):
     initial_offset_amount: float
     offset_contribution_frequency: str
     offset_contribution_regular_amount: float
+    extra_repayments_frequency: str
+    extra_repayments_regular_amount: float
+    capture_interest_accrual: bool

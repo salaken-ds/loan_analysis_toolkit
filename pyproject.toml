@@ -1,6 +1,6 @@
 [project]
 name = "loan-analysis-toolkit"
-version = "0.1.2"
+version = "0.2.0"
 description = "Provides various tools for loan analysis, including generating loan amortization schedule and total interest paid using daily calculation."
 readme = "README.md"
 authors = [
