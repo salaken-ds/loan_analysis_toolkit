@@ -145,4 +145,3 @@ Creates a loan summary from loan details.
   - `total_interest_charged` (float): Total interest charged.  
   - `total_repayments` (float): Total repayments made.
 
----
