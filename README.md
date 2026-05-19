@@ -5,6 +5,8 @@ This packages generates all transactions and an interest schedule for loan accou
 ## Installation
 `pip install loan-analysis-toolkit`
 
+Find the package on PyPi: https://pypi.org/project/loan-analysis-toolkit/ 
+
 ## Technical Documentation
 https://salaken-ds.github.io/loan_analysis_toolkit/
 
